@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ANiOL(开发中)</title>
+    <style type="text/css">
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .btn-danger {
+            color: #fff;
+            background-color: #d9534f;
+            border-color: #d43f3a;
+        }
+        .btn-danger:hover,
+        .btn-danger:focus,
+        .btn-danger.focus,
+        .btn-danger:active,
+        .btn-danger.active,
+        .open > .dropdown-toggle.btn-danger {
+            color: #fff;
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+    </style>
+</head>
+<body>
+<h1>V86 Linux已运行</h1>
+
+<h1 id="ssh_ip"></h1>
+<h1 id="ip">入口：</h1>
+
+<p style="text-align: center">
+    <button onclick="openWin()" class="btn btn-primary">测试虚拟机</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button onclick="quit()" class="btn btn-danger">退出</button>
+</p>
+
+<script>
+    // You can also require other files to run in this process
+    require('./renderer.js');
+    const {ipcRenderer: ipc} = require('electron');
+
+
+    const ip = require('ip');
+    const IPAddress = ip.address();
+    //console.log(IPAddress);
+    const url="http://" + IPAddress + ":3000";
+    document.getElementById("ip").innerHTML += url;
+
+
+    function quit() {
+
+        ipc.send('quit');
+    }
+
+    function openWin() {
+
+        ipc.send('openUrl',url);
+    }
+</script>
+</body>
+</html>
