@@ -1,2 +1,1 @@
-## The previous account of SamuelChest
-## My latest github profile [here](https://github.com/SamuelChest)
+## I have moved to [here](https://github.com/SamuelCheston)
